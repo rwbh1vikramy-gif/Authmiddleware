@@ -47,18 +47,13 @@ console.log(user)
 
 bcrypt.compare(myPlaintextPassword, hash, function(err, result) {
  
-if(err){
-res.json({success:false, message:err.message})
+if(result){
+   let  accessToken =jwt.sign({name:user.name, role:user.role, email:user.email, UserId:user._id}, 'shhhhh', { expiresIn: 10 });
+let  refreshToken = jwt.sign({name:user.name, role:user.role, email:user.email,UserId:user._id}, 'shhhhh', { expiresIn:20});
+
+ res.json({success:true, message:"login successfully", accessToken, refreshToken})
 }else{
-
-let  accessToken = jwt.sign({name:user.name, role:user.role, email:user.email, UserId:user._id}, 'shhhhh', { expiresIn: 60 * 60 });
-let  refreshToken = jwt.sign({name:user.name, role:user.role, email:user.email,UserId:user._id}, 'shhhhh', { expiresIn:"7d"});
-
-
-
-
-   res.json({success:true, message:"login successfully", accessToken, refreshToken})
-
+   return res.json({success:false, message:err})
 }
 
 });
@@ -76,7 +71,7 @@ res.json({success:false, message:e.message})
 
 Userrouter.post("/create-admin",Auth("manager"),  (req,res)=>{
 
-
+res.json({success:true, message:"admin created successfully"})
 
 })
 
