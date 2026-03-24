@@ -1,6 +1,7 @@
  var jwt = require('jsonwebtoken');
+const { User } = require('../modals');
  
- function Auth(role){
+ function Auth(...role){
 
 return (req,res,next)=>{
 
@@ -10,7 +11,8 @@ try{
         let token= req.headers.accesstoken.split(" ")[1]
     var decoded = jwt.verify(token, 'shhhhh');
     console.log(decoded)
-if(decoded.role==role){
+
+if(role.includes(decoded.role)){
     req.userId=decoded.UserId
     next()
 }else{
@@ -43,15 +45,27 @@ return res.json({message:e.message})
 return res.json({message:e.message})
 }
 
-
-
-
-
-
-
-
 }
 
 }
 
-module.exports=Auth
+
+
+
+function checkdata(req,res,next){
+let {password,email, name}=req.body
+if(!password || !email || !name ) return res.json({message:"all field required", success:false})
+
+
+let exituser= User.find({email:email})
+if(exituser) return res.json({success:false, message:"user allready exit with this email"})
+
+
+next()
+
+
+}
+
+
+
+module.exports={Auth, checkdata}
