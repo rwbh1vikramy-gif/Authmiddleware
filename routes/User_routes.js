@@ -5,6 +5,9 @@ const { User } = require("../modals");
 var jwt = require('jsonwebtoken');
 const {Auth,checkdata} = require("../middleware/Authmiddleware");
 
+let nodemailer= require("nodemailer")
+
+
 let  saltRounds=3
 
 let role= ["manager", "admin", "user"]
@@ -61,8 +64,6 @@ let  refreshToken = jwt.sign({name:user.name, role:user.role, email:user.email,U
 res.json({success:false, message:e.message})
 }
 
-
-
 })
 
 
@@ -98,6 +99,56 @@ res.json({success:false, message:e.message})
 
 
 })
+
+
+
+
+let transported = nodemailer.createTransport({
+service:"gmail",
+auth:{
+  user:process.env.USER,
+  pass:process.env.PASSWORD
+}
+})
+
+
+Userrouter.post("/send_email", async (req,res)=>{
+let {email,name}=req.body
+
+async function replytosender(){
+   const info = await transported.sendMail({
+      from: `Vikram Yadav <${process.env.USER}>`,
+      to: email,
+      subject: `Thank you for reaching out to Vikram Yadav`,
+      html: `
+      `,
+    });
+}
+
+
+
+let info = await transported.sendMail({
+  from: `"${name}"<${process.env.User}>`, 
+  to: "imaaniperfumesweb@gmail.com",
+  replyTo: email, 
+  subject: "This testing for my self",
+  html: `
+    <h3 style="color:green; font-size:"20px">Connected Person Name: ${name}</h3>
+    
+  `,
+});
+
+await replytosender()
+
+res.json({message:"email send successfully"})
+
+
+})
+
+
+
+
+
 
 
 
