@@ -177,8 +177,61 @@ res.json({success:false, message:e.message})
 }
 })
 
+function generateOtp(){
+
+let otp = Math.floor(1000 + Math.random() * 9000);
+console.log(otp);
+return otp
+
+}
 
 
+Userrouter.post("/generate_otp", async(req,res)=>{
+try{
+let {email}= req.body
+let exituser= await User.find({email})
+
+if(!exituser) return res.json({success:false, message:"email not found"})
+
+
+let otp=generateOtp()
+
+
+
+   let info = await transported.sendMail({
+  from: `"${exituser.name}"<${process.env.User}>`, 
+  to: `${email}`,
+  subject: "forget password",
+  html: `
+    <h3 style="color:green; font-size:"20px">Your OTP is :</h3>
+    <h3 style="color:green; font-size:"20px">OTp: ${otp}</h3>
+  `,
+});
+
+res.json({success:true, message:"otp has been send to you email"})
+
+
+}catch(e){
+res.json({success:false, message:e.message})
+}
+})
+
+
+Userrouter.post("/reset-password", (req,res)=>{
+
+// verify token , if token is still alive then proceed it otherwise return without change password
+
+try{
+   res.json({success:true, message:"password changed successfully"})
+}catch(e){
+res.json({success:false, message:e.message})
+}
+
+
+
+
+
+})
 
 
 
