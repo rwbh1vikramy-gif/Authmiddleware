@@ -1,0 +1,174 @@
+/* Container styling */
+.login_container {
+    width: 300px;
+    margin: 100px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    text-align: center;
+    background-color: #f9f9f9;
+}
+
+/* Input fields */
+.login_container input[type="text"] {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    outline: none;
+}
+
+/* Submit button */
+.login_container input[type="submit"] {
+    width: 95%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.login_container input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Forget password button */
+.login_container button {
+    margin-top: 10px;
+    padding: 8px 15px;
+    background-color: transparent;
+    border: none;
+    color: #007bff;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.login_container button:hover {
+    color: #0056b3;
+}
+
+
+
+
+
+/* Container */
+.forget_password {
+    width: 320px;
+    margin: 120px auto;
+    padding: 25px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    background-color: #f9fbff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Input field */
+.forget_password input[type="email"] {
+    width: 92%;
+    padding: 10px;
+    margin: 15px 0;
+    border: 1px solid #bbb;
+    border-radius: 6px;
+    outline: none;
+    transition: 0.3s;
+}
+
+/* Focus effect */
+.forget_password input[type="email"]:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+/* Submit button */
+.forget_password input[type="submit"] {
+    width: 96%;
+    padding: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* Hover effect */
+.forget_password input[type="submit"]:hover {
+    background-color: #1e7e34;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Full page center */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f6f9;
+}
+
+/* Heading */
+h1 {
+  text-align: center;
+  margin-top: 40px;
+  color: #333;
+}
+
+/* Form container */
+.change_password {
+  width: 320px;
+  margin: 30px auto;
+  padding: 25px;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Input fields */
+.change_password input[type="text"] {
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+/* Focus effect */
+.change_password input[type="text"]:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* Submit button */
+.change_password input[type="submit"] {
+  padding: 10px;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* Hover effect */
+.change_password input[type="submit"]:hover {
+  background: #0056b3;
+}
