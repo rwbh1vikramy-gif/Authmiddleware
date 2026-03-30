@@ -146,6 +146,37 @@ res.json({message:"email send successfully"})
 })
 
 
+Userrouter.post("/forget_password", async(req,res)=>{
+try{
+let {email}= req.body
+let exituser= await User.find({email})
+
+if(!exituser) return res.json({success:false, message:"email not found"})
+
+   let  accessToken =jwt.sign({name:exituser.name, role:exituser.role, email:exituser.email, UserId:exituser._id}, 'shhhhh', { expiresIn: 60*15 });
+let baseapi="http://localhost:5173/reset_password"
+
+let finalApi= `${baseapi}?accessToken=${accessToken}`
+
+
+   let info = await transported.sendMail({
+  from: `"${exituser.name}"<${process.env.User}>`, 
+  to: `${email}`,
+  subject: "forget password",
+  html: `
+    <h3 style="color:green; font-size:"20px">this link will expire within 15 minutes</h3>
+    <h3 style="color:green; font-size:"20px">reset-link:${finalApi}</h3>
+  `,
+});
+
+res.json({success:true, message:"link send to your email for reset password"})
+
+
+}catch(e){
+res.json({success:false, message:e.message})
+}
+})
+
 
 
 
